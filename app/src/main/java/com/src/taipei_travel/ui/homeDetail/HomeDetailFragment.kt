@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import com.src.taipei_travel.R
 import com.src.taipei_travel.data.remote.model.Attraction
@@ -55,6 +57,8 @@ class HomeDetailFragment : Fragment() {
                 .load(homeItem.attraction.images.firstOrNull()?.src)
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
+                .apply(RequestOptions().override(400, 200))
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(it.image)
             it.webUrl.text = homeItem.attraction.url
             it.webUrl.setOnClickListener {
