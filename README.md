@@ -1,5 +1,6 @@
 ### Demo
-https://youtu.be/a8AyPO7f9K8?si=sWwsrZgWMEQCga2F
+[![](https://markdown-videos-api.jorgenkh.no/youtube/a8AyPO7f9K8?si=sWwsrZgWMEQCga2F)](https://youtu.be/a8AyPO7f9K8?si=sWwsrZgWMEQCga2F)
+
 
 ### MAD skills
 * Kotlin
