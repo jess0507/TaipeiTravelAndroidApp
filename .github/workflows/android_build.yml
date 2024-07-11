@@ -1,0 +1,57 @@
+name: Build android apk
+
+on:
+  push:
+    branches: [ 
+      "android/test/*", 
+      "android/release/*",
+    ]
+
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+  PROJECT_NAME: ""
+
+jobs:
+  android-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check if github.base_ref is in array
+        id: build
+        run: |
+          array=("ionex_homework" "github_api")
+          IN="${{ env.BRANCH_NAME }}"
+          IFS='/' read -ra paths <<< "$IN"
+          for path in "${paths[@]}"
+          do
+            echo "path, $path"
+            for item in "${array[@]}"; do
+              echo "item, $item"
+              if [[ "$path" == "$item" ]]; then
+                echo "PROJECT_NAME=$item" >> $GITHUB_ENV
+                break 2
+              fi
+            done
+          done
+          
+      - name: Project name
+        run: |
+          echo "Project name is: ${{ env.PROJECT_NAME }}"
+      
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+    
+      - name: Build debug apk
+        run: cd ${{ env.PROJECT_NAME }} && ./gradlew assembleDebug
+    
+      - uses: actions/upload-artifact@v4
+        with: 
+          name: app-debug.apk
+          path: ${{ env.PROJECT_NAME }}/app/build/outputs/apk/debug/app-debug.apk
+      

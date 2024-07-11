@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.src.taipei_travel.ui.home.HomeFragment">
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_home_detail"
+            app:destination="@id/fragment_home_detail" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_setting"
+            app:destination="@id/fragment_setting" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_webview"
+            app:destination="@id/fragment_webview" />
+    </fragment>
+
+    <fragment android:id="@+id/fragment_home_detail"
+        android:name="com.src.taipei_travel.ui.homeDetail.HomeDetailFragment">
+        <argument
+            android:name="argJsonString"
+            app:argType="string"
+            />
+        <action
+            android:id="@+id/action_fragment_home_detail_to_fragment_webview"
+            app:destination="@id/fragment_webview" />
+    </fragment>
+
+    <fragment android:id="@+id/fragment_webview"
+        android:name="com.src.taipei_travel.ui.webview.WebViewFragment">
+        <argument
+            android:name="argJsonString"
+            app:argType="string"
+            />
+    </fragment>
+
+    <fragment android:id="@+id/fragment_setting"
+        android:name="com.src.taipei_travel.ui.setting.SettingFragment">
+        <action
+            android:id="@+id/action_fragment_setting_to_fragment_setting_detail"
+            app:destination="@id/fragment_setting_detail" />
+    </fragment>
+
+    <fragment android:id="@+id/fragment_setting_detail"
+        android:name="com.src.taipei_travel.ui.settingDetail.SettingDetailFragment">
+    </fragment>
+</navigation>
