@@ -3,13 +3,11 @@ name: Build android apk
 on:
   push:
     branches: [ 
-      "android/test/*", 
-      "android/release/*",
+      "*",
     ]
 
 env:
-  BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
-  PROJECT_NAME: ""
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   android-build:
