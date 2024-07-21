@@ -6,9 +6,9 @@
 * Kotlin
 
 * Architecture
+  * MVVM
   * DI
     * Hilt
-    * MVVM
     
 * UI
   * Fragment
