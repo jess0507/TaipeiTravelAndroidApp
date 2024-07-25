@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
 
         shareViewModel.settings.observe(this) {
-            val mode = it.darkMode
+            val mode = it.darkMode.mode
             if (mode == AppCompatDelegate.getDefaultNightMode()) return@observe
             Timber.d("setDefaultNightMode: $mode")
             AppCompatDelegate.setDefaultNightMode(mode)

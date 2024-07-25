@@ -15,8 +15,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.src.taipei_travel.R
+import com.src.taipei_travel.data.model.toOption
+import com.src.taipei_travel.data.model.Setting
 import com.src.taipei_travel.databinding.FragmentSettingBinding
-import com.src.taipei_travel.ui.settingDetail.model.SettingOption
 import com.src.taipei_travel.ui.share.ShareViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -44,14 +45,13 @@ class SettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.recycleView?.layoutManager = LinearLayoutManager(context)
-        settingsAdapter = SettingsAdapter(SettingOption.getAllOptions(), showCheck = false) {
-            if (it is SettingOption) {
-                val bundle = bundleOf("argJsonString" to Gson().toJson(it))
-                findNavController().navigate(
-                    R.id.action_fragment_setting_to_fragment_setting_detail,
-                    bundle
-                )
-            }
+        val options = Setting.entries.map { it.toOption() }
+        settingsAdapter = SettingsAdapter(options, showCheck = false) {
+            val bundle = bundleOf("argJsonString" to Gson().toJson(it))
+            findNavController().navigate(
+                R.id.action_fragment_setting_to_fragment_setting_detail,
+                bundle
+            )
         }
         binding?.recycleView?.adapter = settingsAdapter
 

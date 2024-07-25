@@ -1,9 +1,9 @@
 package com.src.taipei_travel.di
 
-import com.src.taipei_travel.domain.SettingDataStoreRepository
-import com.src.taipei_travel.domain.SettingDataStoreRepositoryImpl
-import com.src.taipei_travel.domain.DataRepository
-import com.src.taipei_travel.domain.DataRepositoryImpl
+import com.src.taipei_travel.repository.SettingDataStoreRepository
+import com.src.taipei_travel.repository.SettingDataStoreRepositoryImpl
+import com.src.taipei_travel.repository.DataRepository
+import com.src.taipei_travel.repository.DataRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.src.taipei_travel.data.local.datastore.model
+package com.src.taipei_travel.data.model
 
 import kotlinx.serialization.Serializable
 

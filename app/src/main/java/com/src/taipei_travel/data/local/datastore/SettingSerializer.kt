@@ -1,4 +1,4 @@
-package com.src.taipei_travel.data.local.datastore.model
+package com.src.taipei_travel.data.local.datastore
 
 import androidx.datastore.core.Serializer
 import kotlinx.serialization.SerializationException

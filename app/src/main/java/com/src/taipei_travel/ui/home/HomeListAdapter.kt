@@ -11,7 +11,6 @@ import com.src.taipei_travel.data.remote.model.Attraction
 import com.src.taipei_travel.data.remote.model.New
 import com.src.taipei_travel.databinding.ItemAttractionBinding
 import com.src.taipei_travel.databinding.ItemNewBinding
-import timber.log.Timber
 
 class HomeListAdapter(
     private var items: List<HomeItem> = listOf(),

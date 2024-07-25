@@ -1,8 +1,9 @@
-package com.src.taipei_travel.domain
+package com.src.taipei_travel.repository
 
 import androidx.datastore.core.DataStore
-import com.src.taipei_travel.data.local.datastore.model.Language
-import com.src.taipei_travel.data.local.datastore.model.Settings
+import com.src.taipei_travel.data.model.Language
+import com.src.taipei_travel.data.local.datastore.Settings
+import com.src.taipei_travel.data.model.DarkMode
 import com.src.taipei_travel.di.Dispatcher
 import com.src.taipei_travel.di.NiaDispatchers
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,7 +16,7 @@ class SettingDataStoreRepositoryImpl @Inject constructor(
     @Dispatcher(NiaDispatchers.IO) val scope: CoroutineDispatcher,
     private val dataStore: DataStore<Settings>,
 ): SettingDataStoreRepository {
-    override suspend fun updateDataStore(darkMode: Int?, language: Language?) {
+    override suspend fun updateDataStore(darkMode: DarkMode?, language: Language?) {
         Timber.d("darkMode: $darkMode, language: $language")
         withContext(scope) {
             try {

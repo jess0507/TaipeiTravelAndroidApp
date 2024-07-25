@@ -3,12 +3,11 @@ package com.src.taipei_travel.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.src.taipei_travel.data.local.datastore.model.Language
-import com.src.taipei_travel.domain.DataRepositoryImpl
+import com.src.taipei_travel.data.model.Language
+import com.src.taipei_travel.repository.DataRepositoryImpl
 import com.src.taipei_travel.data.remote.Result
 import com.src.taipei_travel.data.remote.model.Attraction
 import com.src.taipei_travel.data.remote.model.New
-import com.src.taipei_travel.ui.settingDetail.SettingDetailState
 import com.src.taipei_travel.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

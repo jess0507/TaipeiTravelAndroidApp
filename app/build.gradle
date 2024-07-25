@@ -7,14 +7,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 34
-    buildToolsVersion "30.0.3"
     namespace = "com.src.taipei_travel"
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.src.taipei_travel"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         multiDexEnabled true

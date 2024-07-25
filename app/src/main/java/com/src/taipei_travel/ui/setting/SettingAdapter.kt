@@ -6,11 +6,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.src.taipei_travel.R
-import com.src.taipei_travel.data.local.datastore.model.Settings
-import com.src.taipei_travel.ui.settingDetail.model.DarkModeOption
-import com.src.taipei_travel.ui.settingDetail.model.LanguageOption
-import com.src.taipei_travel.ui.settingDetail.model.Option
-import com.src.taipei_travel.ui.settingDetail.model.SettingOption
+import com.src.taipei_travel.data.local.datastore.Settings
+import com.src.taipei_travel.data.model.Option
+import com.src.taipei_travel.data.model.Setting
 
 class SettingsAdapter(
     private var options: List<Option> = listOf(),
@@ -44,20 +42,8 @@ class SettingsAdapter(
         this.options = options
     }
 
-    fun updateSettings(settings: Settings) {
+    fun updateSelectedIndex(index: Int) {
         if (!showCheck) return
-
-        val index: Int = options.indexOfFirst {
-            when(it) {
-                is DarkModeOption -> {
-                    it.id == settings.darkMode
-                }
-                is LanguageOption -> {
-                    it.language == settings.language
-                }
-                else -> false
-            }
-        }
 
         val lastIndex = selectedPosition
         selectedPosition = index

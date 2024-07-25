@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
-import com.src.taipei_travel.data.local.datastore.model.Settings
-import com.src.taipei_travel.data.local.datastore.model.SettingsSerializer
+import com.src.taipei_travel.data.local.datastore.Settings
+import com.src.taipei_travel.data.local.datastore.SettingsSerializer
 import com.src.taipei_travel.data.remote.ApiService
 import com.src.taipei_travel.data.remote.RetryInterceptor
 import dagger.Module

@@ -1,4 +1,4 @@
-package com.src.taipei_travel.domain
+package com.src.taipei_travel.repository
 
 import com.src.taipei_travel.data.remote.ApiService
 import com.src.taipei_travel.data.remote.Result
