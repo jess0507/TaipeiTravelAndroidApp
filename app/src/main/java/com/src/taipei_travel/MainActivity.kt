@@ -1,11 +1,13 @@
 package com.src.taipei_travel
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -20,6 +22,7 @@ import com.src.taipei_travel.databinding.ActivityMainBinding
 import com.src.taipei_travel.ui.share.ShareViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -45,6 +48,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
+
+        shareViewModel.settings.observe(this) {
+            val mode = it.darkMode
+            if (mode == AppCompatDelegate.getDefaultNightMode()) return@observe
+            Timber.d("setDefaultNightMode: $mode")
+            AppCompatDelegate.setDefaultNightMode(mode)
+        }
 
         lifecycleScope.launch {
             shareViewModel.translations.collect {

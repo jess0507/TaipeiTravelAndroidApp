@@ -9,7 +9,6 @@ import com.src.taipei_travel.domain.SettingDataStoreRepository
 import com.src.taipei_travel.ui.settingDetail.model.DarkModeOption
 import com.src.taipei_travel.ui.settingDetail.model.LanguageOption
 import com.src.taipei_travel.ui.settingDetail.model.Option
-import com.src.taipei_travel.data.remote.model.Attraction
 import com.src.taipei_travel.ui.settingDetail.model.SettingOption
 import com.src.taipei_travel.data.local.datastore.model.Settings
 import com.src.taipei_travel.util.Constants
@@ -28,33 +27,13 @@ class ShareViewModel @Inject constructor(
     private val settingDataStoreRepository: SettingDataStoreRepository
 ): ViewModel() {
     var settings = MutableLiveData<Settings>()
-
-    var settingOption = MutableStateFlow<SettingOption>(SettingOption.DarkMode())
-    var selectedPosition = MutableLiveData(-1)
     var translations = MutableStateFlow<Map<String, String>>(mapOf())
-
-    val settingDetailState : StateFlow<SettingDetailState> = combine(
-        settingOption,
-        translations
-    ) { settingOption, translations ->
-        SettingDetailState(settingOption, translations)
-    }.stateIn(
-        viewModelScope,
-        SharingStarted.Lazily,
-        SettingDetailState()
-    )
-
 
     init {
         viewModelScope.launch {
             settingDataStoreRepository.readDataStore().collect {
                 settings.value = it
                 Timber.d("update settings from store: $it")
-                triggerDarkMode(it.darkMode)
-
-                val pos: Int = settingOption.value.getSubOptionIndex(it)
-                selectedPosition.value = pos
-                Timber.d("pos: $pos")
 
                 settings.value?.language?.let { trans ->
                     translations.value = Constants.getTranslation(trans)
@@ -76,10 +55,5 @@ class ShareViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    private fun triggerDarkMode(mode: Int) {
-        if (mode == AppCompatDelegate.getDefaultNightMode()) return
-        AppCompatDelegate.setDefaultNightMode(mode)
     }
 }

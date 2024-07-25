@@ -12,9 +12,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.src.taipei_travel.databinding.FragmentSettingDetailBinding
+import com.src.taipei_travel.ui.home.HomeItem
 import com.src.taipei_travel.ui.setting.SettingsAdapter
 import com.src.taipei_travel.ui.settingDetail.model.Option
+import com.src.taipei_travel.ui.settingDetail.model.SettingOption
 import com.src.taipei_travel.ui.share.ShareViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -43,22 +46,22 @@ class SettingDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val optionString = arguments?.getString("argJsonString")
+        val option: Option = Gson().fromJson(optionString, Option::class.java)
+        val settingOption: SettingOption = SettingOption.getSettingOptionFromOption(option) ?: return
+
         binding?.recycleView?.layoutManager = LinearLayoutManager(context)
-        settingsAdapter = SettingsAdapter {
+        settingsAdapter = SettingsAdapter(settingOption.getSubOptions()) {
             shareViewModel.updateDataStore(it)
         }
         binding?.recycleView?.adapter = settingsAdapter
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                shareViewModel.settingDetailState.collect { state ->
-
+                shareViewModel.translations.collect { state ->
                     val toolbar = (activity as AppCompatActivity).supportActionBar
-                    toolbar?.title = state.translations[state.settingOption.name]
-
-                    val options: List<Option> = state.settingOption.getSubOptions()
-                    settingsAdapter.updateOptions(options)
-                    settingsAdapter.updateTranslations(state.translations)
+                    toolbar?.title = state[settingOption.name]
+                    settingsAdapter.updateTranslations(state)
                 }
             }
         }

@@ -14,7 +14,6 @@ sealed class SettingOption(name: String): Option(name) {
             is Language -> LanguageOption.getAllOptions()
         }
 
-
     fun getSubOptionIndex(settings: Settings): Int {
         val options: List<Option> = getSubOptions()
         return when(this) {
@@ -33,5 +32,13 @@ sealed class SettingOption(name: String): Option(name) {
 
     companion object {
         fun getAllOptions(): List<SettingOption> = listOf(DarkMode(), Language())
+
+        fun getSettingOptionFromOption(option: Option): SettingOption? {
+            return when(option.name) {
+                "darkmode" -> DarkMode()
+                "language" -> Language()
+                else -> null
+            }
+        }
     }
 }

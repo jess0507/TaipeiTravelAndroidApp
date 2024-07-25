@@ -2,12 +2,7 @@ name: Build android apk
 
 on:
   push:
-    branches: [ 
-      "*",
-    ]
-
-env:
-  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+    branches: ["*",]
 
 jobs:
   android-build:
